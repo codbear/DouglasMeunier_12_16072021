@@ -1,0 +1,33 @@
+@import '../../theme/palette';
+@import '../../theme/sizing';
+
+.SideNav {
+  position: fixed;
+  top: $_header_height;
+  left: 0;
+  bottom: 0;
+  width: 117px;
+  background-color: $_color_background_dark;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &_item {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &_copyright {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    color: $_color_text_contrasted;
+  }
+}
