@@ -1,10 +1,8 @@
 import './App.scss';
+import ProfileScreen from './screens/Profile/ProfileScreen';
 
 function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+  return <ProfileScreen />;
 }
 
 export default App;
