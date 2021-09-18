@@ -1,0 +1,40 @@
+@import '../../theme/palette';
+@import '../../theme/sizing';
+
+.Header {
+  padding-left: 28px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  background-color: $_color_background_dark;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $_header_height;
+
+  &_logo {
+    width: 178px;
+    background: transparent url('../../vectors/LogoSportSee.svg') no-repeat;
+    background-size: contain;
+    text-indent: -30000px;
+  }
+
+  &_nav {
+    width: 100%;
+
+    ul {
+      list-style-type: none;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 70px;
+    }
+
+    &_item {
+      margin-right: 16px;
+      color: $_color_text_contrasted;
+    }
+  }
+}
