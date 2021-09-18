@@ -1,9 +1,41 @@
 import { Layout } from '../../components';
 import './ProfileScreen.scss';
+import CaloriesIcon from '../../vectors/calories-icon.svg';
+import CarbsIcon from '../../vectors/carbs-icon.svg';
+import FatIcon from '../../vectors/fat-icon.svg';
+import ProteinsIcon from '../../vectors/protein-icon.svg';
+import { KeyDataCard } from '../../components/KeyDataCard';
 
 const user = {
   firstName: 'Thomas',
 };
+
+const keyData = [
+  {
+    icon: CaloriesIcon,
+    label: 'Calories',
+    count: 1930,
+    unit: 'kCal',
+  },
+  {
+    icon: ProteinsIcon,
+    label: 'Protéines',
+    count: 155,
+    unit: 'g',
+  },
+  {
+    icon: CarbsIcon,
+    label: 'Glucides',
+    count: 290,
+    unit: 'g',
+  },
+  {
+    icon: FatIcon,
+    label: 'Lipides',
+    count: 50,
+    unit: 'g',
+  },
+];
 
 const ProfileScreen = () => {
   return (
@@ -19,11 +51,16 @@ const ProfileScreen = () => {
           <div className="Profile_chart">graph 3</div>
           <div className="Profile_chart">graph 4</div>
         </div>
-        <div className="Profile_dataWrapper Profile_statsWrapper">
-          <div className="Profile_stat">stat 1</div>
-          <div className="Profile_stat">stat 2</div>
-          <div className="Profile_stat">stat 3</div>
-          <div className="Profile_stat">stat 4</div>
+        <div className="Profile_dataWrapper Profile_keyDataWrapper">
+          {keyData.map((keyDataItem, index) => (
+            <KeyDataCard
+              key={index}
+              label={keyDataItem.label}
+              count={keyDataItem.count}
+              unit={keyDataItem.unit}
+              icon={keyDataItem.icon}
+            />
+          ))}
         </div>
       </div>
     </Layout>
