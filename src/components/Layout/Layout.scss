@@ -1,0 +1,14 @@
+@import '../../theme/sizing';
+@import '../../theme/breakpoints';
+
+.MainContent {
+  margin: {
+    top: $_header_height;
+    left: $_sideNav_width;
+  }
+  padding: 34px 5%;
+
+  @media (break-up(lg)) {
+    padding: 68px 10%;
+  }
+}

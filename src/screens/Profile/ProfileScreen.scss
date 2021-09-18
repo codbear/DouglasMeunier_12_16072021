@@ -1,0 +1,68 @@
+@import '../../theme/palette';
+@import '../../theme/breakpoints';
+
+.Profile {
+  &_hello {
+    font-size: 48px;
+    margin-bottom: 41px;
+
+    &_firstName {
+      color: $_color_text_accent;
+    }
+  }
+
+  &_dataGrid {
+    margin-top: 71px;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &_dataWrapper {
+    display: grid;
+    grid-gap: 30px;
+    width: 100%;
+    margin-bottom: 30px;
+
+    @media (break-up(lg)) {
+      max-width: 835px;
+    }
+  }
+
+  &_chartsWrapper {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &_chart {
+    width: 100%;
+    height: 263px;
+
+    &--large {
+      height: 320px;
+      grid-column: span 3;
+    }
+  }
+
+  &_statsWrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    @media (break-up(lg)) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      max-width: 258px;
+      margin-left: 30px;
+    }
+  }
+
+  &_stat {
+    width: 100%;
+    height: 124px;
+    background-color: $_color_background_alternative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (break-up(lg)) {
+      height: 100%;
+    }
+  }
+}
