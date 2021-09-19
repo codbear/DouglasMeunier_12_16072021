@@ -35,6 +35,8 @@
   &_chart {
     width: 100%;
     height: 263px;
+    border-radius: 5px;
+    overflow: hidden;
 
     &--large {
       height: 320px;

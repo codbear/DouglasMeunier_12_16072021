@@ -1,10 +1,9 @@
-import { Layout } from '../../components';
 import './ProfileScreen.scss';
+import { Layout, KeyDataCard, ActivityChart } from '../../components';
 import CaloriesIcon from '../../vectors/calories-icon.svg';
 import CarbsIcon from '../../vectors/carbs-icon.svg';
 import FatIcon from '../../vectors/fat-icon.svg';
 import ProteinsIcon from '../../vectors/protein-icon.svg';
-import { KeyDataCard } from '../../components/KeyDataCard';
 
 const user = {
   firstName: 'Thomas',
@@ -37,6 +36,44 @@ const keyData = [
   },
 ];
 
+const userActivity = [
+  {
+    day: 1,
+    kilogram: 80,
+    calories: 240,
+  },
+  {
+    day: 2,
+    kilogram: 80,
+    calories: 220,
+  },
+  {
+    day: 3,
+    kilogram: 81,
+    calories: 280,
+  },
+  {
+    day: 4,
+    kilogram: 81,
+    calories: 290,
+  },
+  {
+    day: 5,
+    kilogram: 80,
+    calories: 160,
+  },
+  {
+    day: 6,
+    kilogram: 78,
+    calories: 162,
+  },
+  {
+    day: 7,
+    kilogram: 76,
+    calories: 390,
+  },
+];
+
 const ProfileScreen = () => {
   return (
     <Layout>
@@ -46,7 +83,9 @@ const ProfileScreen = () => {
       <p className="Profile_greetings">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       <div className="Profile_dataGrid">
         <div className="Profile_dataWrapper Profile_chartsWrapper">
-          <div className="Profile_chart Profile_chart--large">graph 1</div>
+          <div className="Profile_chart Profile_chart--large">
+            <ActivityChart data={userActivity} />
+          </div>
           <div className="Profile_chart">graph 2</div>
           <div className="Profile_chart">graph 3</div>
           <div className="Profile_chart">graph 4</div>
