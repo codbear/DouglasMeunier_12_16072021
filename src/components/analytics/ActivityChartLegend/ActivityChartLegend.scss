@@ -1,0 +1,33 @@
+@import '../../../theme/palette';
+
+.ActivityChartLegend {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &_itemsList {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+  }
+
+  &_item {
+    margin-right: 32px;
+    color: $_color_text_alternative;
+
+    &:before {
+      content: '\2022';
+      font-weight: 900;
+      color: $_color_secondary;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    &:nth-child(2) {
+      &:before {
+        color: $_color_primary;
+      }
+    }
+  }
+}
