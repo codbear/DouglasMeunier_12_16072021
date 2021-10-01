@@ -1,0 +1,13 @@
+@import '../../../theme/palette';
+
+.AverageSessionChartTooltip {
+  background-color: $_color_background_default;
+  padding: 8px;
+  margin: 0 7px;
+  text-align: center;
+
+  &_content {
+    color: $_color_text_default;
+    line-height: 24px;
+  }
+}

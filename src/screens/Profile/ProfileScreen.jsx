@@ -1,5 +1,5 @@
 import './ProfileScreen.scss';
-import { Layout, KeyDataCard, ActivityChart } from '../../components';
+import { Layout, KeyDataCard, ActivityChart, AverageSessionChart } from '../../components';
 import CaloriesIcon from '../../vectors/calories-icon.svg';
 import CarbsIcon from '../../vectors/carbs-icon.svg';
 import FatIcon from '../../vectors/fat-icon.svg';
@@ -74,6 +74,37 @@ const userActivity = [
   },
 ];
 
+const userSession = [
+  {
+    day: 'L',
+    sessionLength: 30,
+  },
+  {
+    day: 'M',
+    sessionLength: 23,
+  },
+  {
+    day: 'M',
+    sessionLength: 45,
+  },
+  {
+    day: 'J',
+    sessionLength: 50,
+  },
+  {
+    day: 'V',
+    sessionLength: 0,
+  },
+  {
+    day: 'S',
+    sessionLength: 0,
+  },
+  {
+    day: 'D',
+    sessionLength: 60,
+  },
+];
+
 const ProfileScreen = () => {
   return (
     <Layout>
@@ -86,7 +117,9 @@ const ProfileScreen = () => {
           <div className="Profile_chart Profile_chart--large">
             <ActivityChart data={userActivity} />
           </div>
-          <div className="Profile_chart">graph 2</div>
+          <div className="Profile_chart">
+            <AverageSessionChart data={userSession} />
+          </div>
           <div className="Profile_chart">graph 3</div>
           <div className="Profile_chart">graph 4</div>
         </div>
