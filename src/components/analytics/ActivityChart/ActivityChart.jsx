@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { useState, useLayoutEffect } from 'react';
+
 import {
   Bar,
   BarChart,
@@ -30,19 +32,36 @@ const defaultProps = {
 };
 
 const ActivityChart = ({ data }) => {
+  const [state, setState] = useState(0);
+
+  useLayoutEffect(() => {
+    setState(1);
+  }, []);
+
   return (
-    <div className="ActivityChart">
+    <div className="ActivityChart" key={state}>
       <ResponsiveContainer>
         <BarChart data={data} barGap={8}>
           <CartesianGrid vertical={false} stroke={CHARTS_PALETTE.STROKE} />
-          <XAxis dataKey="day" tickLine={false} axisLine={false} />
-          <YAxis orientation="right" tickCount={3} tickLine={false} axisLine={false} />
+
+          <XAxis dataKey="day" tickLine={false} axisLine={false} height={46} dy={16} />
+          <YAxis
+            orientation="right"
+            tickCount={3}
+            tickLine={false}
+            axisLine={false}
+            width={56}
+            dx={16}
+          />
+
           <Tooltip content={<ActivityChartTooltip />} />
+
           <Legend
             verticalAlign="top"
             content={<ActivityChartLegend />}
             wrapperStyle={{ paddingBottom: '65px' }}
           />
+
           <Bar
             dataKey="kilogram"
             fill={CHARTS_PALETTE.SECONDARY}
