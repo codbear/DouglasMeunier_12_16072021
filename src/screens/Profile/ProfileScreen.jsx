@@ -4,6 +4,7 @@ import CaloriesIcon from '../../vectors/calories-icon.svg';
 import CarbsIcon from '../../vectors/carbs-icon.svg';
 import FatIcon from '../../vectors/fat-icon.svg';
 import ProteinsIcon from '../../vectors/protein-icon.svg';
+import { PerformanceChart } from '../../components/analytics/PerformanceChart';
 
 const user = {
   firstName: 'Thomas',
@@ -105,6 +106,33 @@ const userSession = [
   },
 ];
 
+const userPerformances = [
+  {
+    value: 90,
+    kind: 'Intensité',
+  },
+  {
+    value: 200,
+    kind: 'Vitesse',
+  },
+  {
+    value: 50,
+    kind: 'Force',
+  },
+  {
+    value: 140,
+    kind: 'Endurance',
+  },
+  {
+    value: 120,
+    kind: 'Energie',
+  },
+  {
+    value: 80,
+    kind: 'Cardio',
+  },
+];
+
 const ProfileScreen = () => {
   return (
     <Layout>
@@ -120,7 +148,9 @@ const ProfileScreen = () => {
           <div className="Profile_chart">
             <AverageSessionChart data={userSession} />
           </div>
-          <div className="Profile_chart">graph 3</div>
+          <div className="Profile_chart">
+            <PerformanceChart data={userPerformances} />
+          </div>
           <div className="Profile_chart">graph 4</div>
         </div>
         <div className="Profile_dataWrapper Profile_keyDataWrapper">

@@ -1,0 +1,15 @@
+@import '../../../theme/palette';
+
+.PerformanceChart {
+  height: 100%;
+  background-color: $_color_background_secondary;
+
+  .recharts-polar-grid-angle {
+    display: none;
+  }
+
+  .recharts-polar-angle-axis {
+    transform: scaleY(1.1);
+    transform-origin: 50% 30%;
+  }
+}
