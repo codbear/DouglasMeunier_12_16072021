@@ -12,6 +12,7 @@
   left: 0;
   right: 0;
   height: $_header_height;
+  z-index: 100;
 
   &_logo {
     width: 178px;
