@@ -1,0 +1,18 @@
+@import '../../../theme/palette';
+
+.AverageSessionChart {
+  background-color: $_color_background_primary;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  position: relative;
+
+  &_title {
+    color: $_color_text_contrasted;
+    width: 70%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px;
+  }
+}

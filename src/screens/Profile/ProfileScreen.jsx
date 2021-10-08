@@ -1,9 +1,145 @@
-import { Layout } from '../../components';
 import './ProfileScreen.scss';
+import {
+  Layout,
+  KeyDataCard,
+  ActivityChart,
+  AverageSessionChart,
+  PerformanceChart,
+  ScoreChart,
+} from '../../components';
+import CaloriesIcon from '../../vectors/calories-icon.svg';
+import CarbsIcon from '../../vectors/carbs-icon.svg';
+import FatIcon from '../../vectors/fat-icon.svg';
+import ProteinsIcon from '../../vectors/protein-icon.svg';
 
 const user = {
   firstName: 'Thomas',
 };
+
+const keyData = [
+  {
+    icon: CaloriesIcon,
+    label: 'Calories',
+    count: 1930,
+    unit: 'kCal',
+  },
+  {
+    icon: ProteinsIcon,
+    label: 'Protéines',
+    count: 155,
+    unit: 'g',
+  },
+  {
+    icon: CarbsIcon,
+    label: 'Glucides',
+    count: 290,
+    unit: 'g',
+  },
+  {
+    icon: FatIcon,
+    label: 'Lipides',
+    count: 50,
+    unit: 'g',
+  },
+];
+
+const userActivity = [
+  {
+    day: 1,
+    kilogram: 80,
+    calories: 240,
+  },
+  {
+    day: 2,
+    kilogram: 80,
+    calories: 220,
+  },
+  {
+    day: 3,
+    kilogram: 81,
+    calories: 280,
+  },
+  {
+    day: 4,
+    kilogram: 81,
+    calories: 290,
+  },
+  {
+    day: 5,
+    kilogram: 80,
+    calories: 160,
+  },
+  {
+    day: 6,
+    kilogram: 78,
+    calories: 162,
+  },
+  {
+    day: 7,
+    kilogram: 76,
+    calories: 390,
+  },
+];
+
+const userSession = [
+  {
+    day: 'L',
+    sessionLength: 30,
+  },
+  {
+    day: 'M',
+    sessionLength: 23,
+  },
+  {
+    day: 'M',
+    sessionLength: 45,
+  },
+  {
+    day: 'J',
+    sessionLength: 50,
+  },
+  {
+    day: 'V',
+    sessionLength: 0,
+  },
+  {
+    day: 'S',
+    sessionLength: 0,
+  },
+  {
+    day: 'D',
+    sessionLength: 60,
+  },
+];
+
+const userPerformances = [
+  {
+    value: 90,
+    kind: 'Intensité',
+  },
+  {
+    value: 200,
+    kind: 'Vitesse',
+  },
+  {
+    value: 50,
+    kind: 'Force',
+  },
+  {
+    value: 140,
+    kind: 'Endurance',
+  },
+  {
+    value: 120,
+    kind: 'Energie',
+  },
+  {
+    value: 80,
+    kind: 'Cardio',
+  },
+];
+
+const userScore = 42;
 
 const ProfileScreen = () => {
   return (
@@ -14,16 +150,29 @@ const ProfileScreen = () => {
       <p className="Profile_greetings">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
       <div className="Profile_dataGrid">
         <div className="Profile_dataWrapper Profile_chartsWrapper">
-          <div className="Profile_chart Profile_chart--large">graph 1</div>
-          <div className="Profile_chart">graph 2</div>
-          <div className="Profile_chart">graph 3</div>
-          <div className="Profile_chart">graph 4</div>
+          <div className="Profile_chart Profile_chart--large">
+            <ActivityChart data={userActivity} />
+          </div>
+          <div className="Profile_chart">
+            <AverageSessionChart data={userSession} />
+          </div>
+          <div className="Profile_chart">
+            <PerformanceChart data={userPerformances} />
+          </div>
+          <div className="Profile_chart">
+            <ScoreChart todayScore={userScore} />
+          </div>
         </div>
-        <div className="Profile_dataWrapper Profile_statsWrapper">
-          <div className="Profile_stat">stat 1</div>
-          <div className="Profile_stat">stat 2</div>
-          <div className="Profile_stat">stat 3</div>
-          <div className="Profile_stat">stat 4</div>
+        <div className="Profile_dataWrapper Profile_keyDataWrapper">
+          {keyData.map((keyDataItem, index) => (
+            <KeyDataCard
+              key={index}
+              label={keyDataItem.label}
+              count={keyDataItem.count}
+              unit={keyDataItem.unit}
+              icon={keyDataItem.icon}
+            />
+          ))}
         </div>
       </div>
     </Layout>
