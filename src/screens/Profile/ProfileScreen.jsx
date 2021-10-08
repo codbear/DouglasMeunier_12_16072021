@@ -1,10 +1,16 @@
 import './ProfileScreen.scss';
-import { Layout, KeyDataCard, ActivityChart, AverageSessionChart } from '../../components';
+import {
+  Layout,
+  KeyDataCard,
+  ActivityChart,
+  AverageSessionChart,
+  PerformanceChart,
+  ScoreChart,
+} from '../../components';
 import CaloriesIcon from '../../vectors/calories-icon.svg';
 import CarbsIcon from '../../vectors/carbs-icon.svg';
 import FatIcon from '../../vectors/fat-icon.svg';
 import ProteinsIcon from '../../vectors/protein-icon.svg';
-import { PerformanceChart } from '../../components/analytics/PerformanceChart';
 
 const user = {
   firstName: 'Thomas',
@@ -133,6 +139,8 @@ const userPerformances = [
   },
 ];
 
+const userScore = 42;
+
 const ProfileScreen = () => {
   return (
     <Layout>
@@ -151,7 +159,9 @@ const ProfileScreen = () => {
           <div className="Profile_chart">
             <PerformanceChart data={userPerformances} />
           </div>
-          <div className="Profile_chart">graph 4</div>
+          <div className="Profile_chart">
+            <ScoreChart todayScore={userScore} />
+          </div>
         </div>
         <div className="Profile_dataWrapper Profile_keyDataWrapper">
           {keyData.map((keyDataItem, index) => (

@@ -1,0 +1,48 @@
+@import '../../../theme/palette';
+
+.ScoreChart {
+  background-color: $_color_background_alternative;
+  width: 100%;
+  height: 100%;
+  padding: 4px;
+  position: relative;
+
+  &_title {
+    width: 70%;
+    position: absolute;
+    top: 24px;
+    left: 30px;
+  }
+
+  &_legend {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 161px;
+    width: 161px;
+    border-radius: 50%;
+    background-color: $_color_background_default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      color: $_color_text_alternative;
+      width: 40%;
+      margin: auto;
+      text-align: center;
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    &_score {
+      font-weight: bold;
+      font-size: 26px;
+    }
+  }
+
+  .recharts-sector:first-child {
+    display: none;
+  }
+}
