@@ -36,7 +36,7 @@ const ScoreChart = ({ todayScore }) => {
           startAngle={90}
           endAngle={450}
         >
-          <RadialBar minAngle={15} dataKey="todayScore" fill={CHARTS_PALETTE.PRIMARY} />
+          <RadialBar dataKey="todayScore" fill={CHARTS_PALETTE.PRIMARY} cornerRadius={5} />
         </RadialBarChart>
       </ResponsiveContainer>
     </div>
