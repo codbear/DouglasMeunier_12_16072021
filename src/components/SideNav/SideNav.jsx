@@ -24,7 +24,7 @@ const SideNav = () => {
     <nav className="SideNav">
       <ul>
         {NAV_ITEMS.map((navItem, index) => (
-          <li className="SideNav_item">
+          <li className="SideNav_item" key={index}>
             <img src={navItem.icon} alt="" />
           </li>
         ))}
