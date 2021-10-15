@@ -2,10 +2,11 @@ import useSearchParams from './useSearchParams';
 import useGet from './useGet';
 
 /**
- *
+ * @description Fetch connected user's info
  * @return {{
  *  isLoading: boolean,
  *  currentUser: {
+ *    id: number,
  *    userInfos: {
  *      firstName: string,
  *      lastName: string

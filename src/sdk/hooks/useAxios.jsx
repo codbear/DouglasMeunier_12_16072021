@@ -1,8 +1,40 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+/**
+ * @typedef {'GET'|'POST'|'PUT'|'PATCH'|'DELETE'} Method - Allowed method to request API
+ */
+
+/**
+ * @typedef {Object.<string|number>} RouteParams
+ */
+
+/**
+ * @typedef {Object} AxiosOptions
+ * @property {boolean} [isEnabled] - Triggers the request when true, useful for dependant queries
+ */
+
+/**
+ * @typedef {Object} AxiosResponse
+ * @property {boolean} isLoading - True until request ends
+ * @property {*} [data] - Body of the response
+ * @property {Error} [error]
+ */
+
+/**
+ * @description Base URL from which API is served
+ * @type {string}
+ */
 axios.defaults.baseURL = 'http://localhost:3000';
 
+/**
+ * @description Create a request with Axios
+ * @param {Method} method
+ * @param {string} endpoint - The API's endpoint to which request must be send
+ * @param {RouteParams} routeParams - The values of params in the endpoint
+ * @param {AxiosOptions} options - Additional options for the request
+ * @return {AxiosResponse}
+ */
 const useAxios = (method, endpoint, routeParams, options) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
