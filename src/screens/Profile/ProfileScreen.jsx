@@ -7,164 +7,88 @@ import {
   PerformanceChart,
   ScoreChart,
 } from '../../components';
-import CaloriesIcon from '../../vectors/calories-icon.svg';
-import CarbsIcon from '../../vectors/carbs-icon.svg';
-import FatIcon from '../../vectors/fat-icon.svg';
-import ProteinsIcon from '../../vectors/protein-icon.svg';
 
-const user = {
-  firstName: 'Thomas',
-};
+import {
+  useCurrentUser,
+  useUserActivity,
+  useUserAverageSessions,
+  useUserKeyData,
+  useUserPerformance,
+  useUserScore,
+} from '../../sdk';
 
-const keyData = [
-  {
-    icon: CaloriesIcon,
-    label: 'Calories',
-    count: 1930,
-    unit: 'kCal',
-  },
-  {
-    icon: ProteinsIcon,
-    label: 'Protéines',
-    count: 155,
-    unit: 'g',
-  },
-  {
-    icon: CarbsIcon,
-    label: 'Glucides',
-    count: 290,
-    unit: 'g',
-  },
-  {
-    icon: FatIcon,
-    label: 'Lipides',
-    count: 50,
-    unit: 'g',
-  },
-];
+import {
+  adaptUserActivity,
+  adaptUserAverageSessions,
+  adaptUserKeyData,
+  adaptUserPerformance,
+  adaptUserScore,
+} from '../../services';
 
-const userActivity = [
-  {
-    day: 1,
-    kilogram: 80,
-    calories: 240,
-  },
-  {
-    day: 2,
-    kilogram: 80,
-    calories: 220,
-  },
-  {
-    day: 3,
-    kilogram: 81,
-    calories: 280,
-  },
-  {
-    day: 4,
-    kilogram: 81,
-    calories: 290,
-  },
-  {
-    day: 5,
-    kilogram: 80,
-    calories: 160,
-  },
-  {
-    day: 6,
-    kilogram: 78,
-    calories: 162,
-  },
-  {
-    day: 7,
-    kilogram: 76,
-    calories: 390,
-  },
-];
-
-const userSession = [
-  {
-    day: 'L',
-    sessionLength: 30,
-  },
-  {
-    day: 'M',
-    sessionLength: 23,
-  },
-  {
-    day: 'M',
-    sessionLength: 45,
-  },
-  {
-    day: 'J',
-    sessionLength: 50,
-  },
-  {
-    day: 'V',
-    sessionLength: 0,
-  },
-  {
-    day: 'S',
-    sessionLength: 0,
-  },
-  {
-    day: 'D',
-    sessionLength: 60,
-  },
-];
-
-const userPerformances = [
-  {
-    value: 90,
-    kind: 'Intensité',
-  },
-  {
-    value: 200,
-    kind: 'Vitesse',
-  },
-  {
-    value: 50,
-    kind: 'Force',
-  },
-  {
-    value: 140,
-    kind: 'Endurance',
-  },
-  {
-    value: 120,
-    kind: 'Energie',
-  },
-  {
-    value: 80,
-    kind: 'Cardio',
-  },
-];
-
-const userScore = 42;
-
+/**
+ *
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ProfileScreen = () => {
+  const { isLoading: isLoadingUser, currentUser } = useCurrentUser();
+  const firstName = currentUser?.userInfos?.firstName;
+  const { isLoading: isLoadingUserActivity, data: userActivity } = useUserActivity(currentUser?.id);
+  const { isLoading: isLoadingUserAverageSession, data: userAverageSessions } =
+    useUserAverageSessions(currentUser?.id);
+  const { isLoading: isLoadingUserKeyData, data: userKeyData } = useUserKeyData(currentUser?.id);
+  const { isLoading: isLoadingUserPerformance, data: userPerformance } = useUserPerformance(
+    currentUser?.id
+  );
+  const { isLoading: isLoadingUserScore, data: userScore } = useUserScore(currentUser?.id);
+
+  const isLoading =
+    isLoadingUser ||
+    isLoadingUserActivity ||
+    isLoadingUserAverageSession ||
+    isLoadingUserKeyData ||
+    isLoadingUserPerformance ||
+    isLoadingUserScore;
+
+  if (isLoading) {
+    return <Layout />;
+  }
+
+  const adaptedUserActivity = adaptUserActivity(userActivity);
+  const adaptedUserAverageSession = adaptUserAverageSessions(userAverageSessions);
+  const adaptedUserKeyData = adaptUserKeyData(userKeyData);
+  const adaptedUserPerformance = adaptUserPerformance(userPerformance);
+  const adaptedUserScore = adaptUserScore(userScore);
+
   return (
     <Layout>
       <p className="Profile_hello">
-        Bonjour <span className="Profile_hello_firstName">{user.firstName}</span>
+        Bonjour <span className="Profile_hello_firstName">{firstName}</span>
       </p>
+
       <p className="Profile_greetings">Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+
       <div className="Profile_dataGrid">
         <div className="Profile_dataWrapper Profile_chartsWrapper">
           <div className="Profile_chart Profile_chart--large">
-            <ActivityChart data={userActivity} />
+            <ActivityChart data={adaptedUserActivity} />
           </div>
+
           <div className="Profile_chart">
-            <AverageSessionChart data={userSession} />
+            <AverageSessionChart data={adaptedUserAverageSession} />
           </div>
+
           <div className="Profile_chart">
-            <PerformanceChart data={userPerformances} />
+            <PerformanceChart data={adaptedUserPerformance} />
           </div>
+
           <div className="Profile_chart">
-            <ScoreChart todayScore={userScore} />
+            <ScoreChart todayScore={adaptedUserScore} />
           </div>
         </div>
+
         <div className="Profile_dataWrapper Profile_keyDataWrapper">
-          {keyData.map((keyDataItem, index) => (
+          {adaptedUserKeyData.map((keyDataItem, index) => (
             <KeyDataCard
               key={index}
               label={keyDataItem.label}
