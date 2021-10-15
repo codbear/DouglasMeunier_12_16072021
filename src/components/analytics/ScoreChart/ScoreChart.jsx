@@ -9,6 +9,11 @@ const propTypes = {
   todayScore: PropTypes.number.isRequired,
 };
 
+/**
+ * @description Render a chart representing the score of the user in percentage
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ScoreChart = ({ todayScore }) => {
   const data = [
     {

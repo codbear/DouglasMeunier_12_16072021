@@ -4,6 +4,9 @@ import DumbbellIcon from '../../vectors/dumbbellIcon.svg';
 import SwimIcon from '../../vectors/swimIcon.svg';
 import YogaIcon from '../../vectors/yogaIcon.svg';
 
+/**
+ * @description Side nav item's config
+ */
 const NAV_ITEMS = [
   {
     icon: YogaIcon,
@@ -19,6 +22,11 @@ const NAV_ITEMS = [
   },
 ];
 
+/**
+ * @description Render the side navigation menu
+ * @return {JSX.Element}
+ * @constructor
+ */
 const SideNav = () => {
   return (
     <nav className="SideNav">

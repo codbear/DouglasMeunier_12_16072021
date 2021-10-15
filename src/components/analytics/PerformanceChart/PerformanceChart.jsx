@@ -14,6 +14,11 @@ const propTypes = {
   ).isRequired,
 };
 
+/**
+ * @description Render a radar chart representing the performances of the user
+ * @return {JSX.Element}
+ * @constructor
+ */
 const PerformanceChart = ({ data }) => {
   return (
     <div className="PerformanceChart">

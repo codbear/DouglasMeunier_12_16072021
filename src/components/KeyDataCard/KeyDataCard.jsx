@@ -8,6 +8,11 @@ const propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+/**
+ * @description Render a single card containing a key data
+ * @return {JSX.Element}
+ * @constructor
+ */
 const KeyDataCard = ({ icon, count, unit, label }) => {
   return (
     <div className="KeyDataCard">

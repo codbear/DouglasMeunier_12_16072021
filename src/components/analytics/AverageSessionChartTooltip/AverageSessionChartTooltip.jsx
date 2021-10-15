@@ -14,6 +14,11 @@ const defaultProps = {
   payload: [],
 };
 
+/**
+ * @description Render the tooltip to display when hovering the AverageSessionChart
+ * @return {JSX.Element}
+ * @constructor
+ */
 const AverageSessionChartTooltip = ({ payload }) => {
   const time = payload[0] || {};
 

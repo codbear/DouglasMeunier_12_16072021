@@ -1,3 +1,6 @@
+/**
+ * @description Use this palette to style charts
+ */
 const CHARTS_PALETTE = {
   PRIMARY: '#e60000',
   SECONDARY: '#282d30',

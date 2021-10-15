@@ -15,6 +15,11 @@ const propTypes = {
   ).isRequired,
 };
 
+/**
+ * @description Render a line chart representing the average sessions time of the user
+ * @return {JSX.Element}
+ * @constructor
+ */
 const AverageSessionChart = ({ data }) => {
   return (
     <div className="AverageSessionChart">

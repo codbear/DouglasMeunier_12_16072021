@@ -31,6 +31,11 @@ const defaultProps = {
   data: [],
 };
 
+/**
+ * @description Render a bar chart representing the activity of the user
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ActivityChart = ({ data }) => {
   const [state, setState] = useState(0);
 

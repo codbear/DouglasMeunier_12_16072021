@@ -26,7 +26,7 @@ import {
 } from '../../services';
 
 /**
- *
+ * @description Render the profile screen
  * @return {JSX.Element}
  * @constructor
  */
