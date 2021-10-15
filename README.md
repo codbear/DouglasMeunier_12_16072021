@@ -1,8 +1,12 @@
-<img src="public/favicon.png"  alt="" width="256">
+<p align="center">
+  <img src="public/favicon.png"  alt="" width="256">
+</p>
 
-# SportSee
+<h1 align="center">SportSee</h1>
 
-This is the source code for SportSee analytics dashboard.
+<p align="center">
+  This is the source code for SportSee analytics dashboard.
+</p>
 
 ## Prerequisites
 
