@@ -27,17 +27,17 @@ Install dependencies
 yarn install
 ```
 
-Set the root URL from which the API is served in `.env` at the root of the project with the key `REACT_APP_API_ROOT_URL`.
+If you serve the API from a different URL than the default one, you should set the root URL from which the API is served in `.env` at the root of the project under the key `REACT_APP_API_ROOT_URL`. 
 
 Start the app in development mode
 ```bash
 yarn start
 ```
-The app is served at http://localhost:3001 if the API is served on port 3000 (default). The page will reload if you make edits.
+The app is served at [http://localhost:3001?userId=12](http://localhost:3001?userId=12) if the API is served on port 3000 (default). The page will reload if you make edits.
 
 ## Usage
-As the authentification is not yet implemented, you need to provide a user id through the GET param `userId`:\
-[http://localhost:3001?userId=12](http://localhost:3001?userId=12)
+As the authentification is not yet implemented, you need to provide a user id through the GET param `userId`.
+If you don't provide it, you will be redirected to [http://localhost:3001?userId=12](http://localhost:3001?userId=12) by default.
 
 ***Currently, two users have been mocked in the provided API. They have id 12 and 18 respectively***
 
