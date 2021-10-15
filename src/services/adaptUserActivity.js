@@ -1,5 +1,5 @@
 /**
- * @typedef {Object[]} AdaptedUserActivity
+ * @typedef {Object} AdaptedUserActivity
  * @property {number} day
  * @property {number} kilogram
  * @property {number} calories
@@ -8,7 +8,7 @@
 /**
  * @description Adapt user activity for ActivityChart
  * @param {UserActivity} userActivity
- * @return {AdaptedUserActivity}
+ * @return {AdaptedUserActivity[]}
  */
 const adaptUserActivity = (userActivity) =>
   userActivity.sessions.map((session) => {

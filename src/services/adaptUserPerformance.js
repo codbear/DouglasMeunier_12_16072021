@@ -1,5 +1,5 @@
 /**
- * @typedef {Object[]} AdaptedUserPerformance
+ * @typedef {Object} AdaptedUserPerformance
  * @property {number} value
  * @property {string} kind
  */
@@ -7,7 +7,7 @@
 /**
  * @description Adapt user performance for PerformanceChart
  * @param {UserPerformance} userPerformance
- * @return {AdaptedUserPerformance}
+ * @return {AdaptedUserPerformance[]}
  */
 const adaptUserPerformance = (userPerformance) => {
   const { kind: performanceKind } = userPerformance;

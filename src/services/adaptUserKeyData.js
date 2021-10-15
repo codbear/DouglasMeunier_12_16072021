@@ -1,14 +1,18 @@
-import CaloriesIcon from '../vectors/calories-icon.svg';
-import ProteinsIcon from '../vectors/protein-icon.svg';
-import CarbsIcon from '../vectors/carbs-icon.svg';
-import FatIcon from '../vectors/fat-icon.svg';
+import caloriesIcon from '../vectors/calories-icon.svg';
+import proteinsIcon from '../vectors/protein-icon.svg';
+import carbsIcon from '../vectors/carbs-icon.svg';
+import fatIcon from '../vectors/fat-icon.svg';
 
 /**
- * @typedef {Object[]} AdaptedUserKeyData
- * @property {node} icon
+ * @typedef {Object} KeyData
+ * @property {string} icon
  * @property {string} label
- * @property {number} count
  * @property {string} unit
+ */
+
+/**
+ * @typedef {Object & KeyData} AdaptedUserKeyData
+ * @property {number} count
  */
 
 /**
@@ -16,27 +20,23 @@ import FatIcon from '../vectors/fat-icon.svg';
  */
 const mapKeyData = {
   calorieCount: {
-    icon: CaloriesIcon,
+    icon: caloriesIcon,
     label: 'Calories',
-    count: 1930,
     unit: 'kCal',
   },
   proteinCount: {
-    icon: ProteinsIcon,
+    icon: proteinsIcon,
     label: 'Protéines',
-    count: 155,
     unit: 'g',
   },
   carbohydrateCount: {
-    icon: CarbsIcon,
+    icon: carbsIcon,
     label: 'Glucides',
-    count: 290,
     unit: 'g',
   },
   lipidCount: {
-    icon: FatIcon,
+    icon: fatIcon,
     label: 'Lipides',
-    count: 50,
     unit: 'g',
   },
 };
@@ -44,8 +44,14 @@ const mapKeyData = {
 /**
  * @description Adapt user key data for KeyDataCard
  * @param {UserKeyData} userKeyData
- * @return {AdaptedUserKeyData}
+ * @return {AdaptedUserKeyData[]}
  */
-const adaptUserKeyData = (userKeyData) => Object.keys(userKeyData).map((key) => mapKeyData[key]);
+const adaptUserKeyData = (userKeyData) =>
+  Object.keys(userKeyData)
+    .filter((key) => !!mapKeyData[key])
+    .map((key) => ({
+      ...mapKeyData[key],
+      count: userKeyData[key],
+    }));
 
 export default adaptUserKeyData;
