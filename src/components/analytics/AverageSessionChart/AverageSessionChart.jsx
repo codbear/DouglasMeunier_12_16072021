@@ -7,10 +7,12 @@ import CHARTS_PALETTE from '../../../theme/chartsPalette';
 import { AverageSessionChartTooltip } from '../AverageSessionChartTooltip';
 
 const propTypes = {
-  data: PropTypes.shape({
-    day: PropTypes.string,
-    sessionLength: PropTypes.number,
-  }).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      day: PropTypes.string,
+      sessionLength: PropTypes.number,
+    })
+  ).isRequired,
 };
 
 const AverageSessionChart = ({ data }) => {

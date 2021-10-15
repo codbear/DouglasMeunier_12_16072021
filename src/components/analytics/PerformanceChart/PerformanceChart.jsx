@@ -6,10 +6,12 @@ import './PerformanceChart.scss';
 import CHARTS_PALETTE from '../../../theme/chartsPalette';
 
 const propTypes = {
-  data: PropTypes.shape({
-    kind: PropTypes.string,
-    value: PropTypes.number,
-  }).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      kind: PropTypes.string,
+      value: PropTypes.number,
+    })
+  ).isRequired,
 };
 
 const PerformanceChart = ({ data }) => {
