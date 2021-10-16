@@ -8,57 +8,36 @@ import {
   ScoreChart,
 } from '../../components';
 
-import {
-  useCurrentUser,
-  useUserActivity,
-  useUserAverageSessions,
-  useUserKeyData,
-  useUserPerformance,
-  useUserScore,
-} from '../../sdk';
+import { useCurrentUser, useUserKeyData } from '../../sdk';
 
-import {
-  adaptUserActivity,
-  adaptUserAverageSessions,
-  adaptUserKeyData,
-  adaptUserPerformance,
-  adaptUserScore,
-} from '../../services';
+import { adaptUserKeyData } from '../../services';
+import useSearchParams from '../../sdk/hooks/useSearchParams';
+import { Redirect } from 'react-router-dom';
 
 /**
- *
+ * @description Render the profile screen
  * @return {JSX.Element}
  * @constructor
  */
 const ProfileScreen = () => {
+  const query = useSearchParams();
+  const isErrorNoUserIdSpecified = !query.get('userId');
+
   const { isLoading: isLoadingUser, currentUser } = useCurrentUser();
+  const userId = currentUser?.id;
   const firstName = currentUser?.userInfos?.firstName;
-  const { isLoading: isLoadingUserActivity, data: userActivity } = useUserActivity(currentUser?.id);
-  const { isLoading: isLoadingUserAverageSession, data: userAverageSessions } =
-    useUserAverageSessions(currentUser?.id);
-  const { isLoading: isLoadingUserKeyData, data: userKeyData } = useUserKeyData(currentUser?.id);
-  const { isLoading: isLoadingUserPerformance, data: userPerformance } = useUserPerformance(
-    currentUser?.id
-  );
-  const { isLoading: isLoadingUserScore, data: userScore } = useUserScore(currentUser?.id);
 
-  const isLoading =
-    isLoadingUser ||
-    isLoadingUserActivity ||
-    isLoadingUserAverageSession ||
-    isLoadingUserKeyData ||
-    isLoadingUserPerformance ||
-    isLoadingUserScore;
+  const { isLoading: isLoadingUserKeyData, data: userKeyData } = useUserKeyData(userId);
+  const adaptedUserKeyData = !isLoadingUserKeyData && adaptUserKeyData(userKeyData);
 
-  if (isLoading) {
-    return <Layout />;
+  // TODO: remove this redirection when authentication is implemented
+  if (isErrorNoUserIdSpecified) {
+    return <Redirect to="/?userId=12" />;
   }
 
-  const adaptedUserActivity = adaptUserActivity(userActivity);
-  const adaptedUserAverageSession = adaptUserAverageSessions(userAverageSessions);
-  const adaptedUserKeyData = adaptUserKeyData(userKeyData);
-  const adaptedUserPerformance = adaptUserPerformance(userPerformance);
-  const adaptedUserScore = adaptUserScore(userScore);
+  if (isLoadingUser) {
+    return <Layout />;
+  }
 
   return (
     <Layout>
@@ -71,32 +50,33 @@ const ProfileScreen = () => {
       <div className="Profile_dataGrid">
         <div className="Profile_dataWrapper Profile_chartsWrapper">
           <div className="Profile_chart Profile_chart--large">
-            <ActivityChart data={adaptedUserActivity} />
+            <ActivityChart userId={userId} />
           </div>
 
           <div className="Profile_chart">
-            <AverageSessionChart data={adaptedUserAverageSession} />
+            <AverageSessionChart userId={userId} />
           </div>
 
           <div className="Profile_chart">
-            <PerformanceChart data={adaptedUserPerformance} />
+            <PerformanceChart userId={userId} />
           </div>
 
           <div className="Profile_chart">
-            <ScoreChart todayScore={adaptedUserScore} />
+            <ScoreChart userId={userId} />
           </div>
         </div>
 
         <div className="Profile_dataWrapper Profile_keyDataWrapper">
-          {adaptedUserKeyData.map((keyDataItem, index) => (
-            <KeyDataCard
-              key={index}
-              label={keyDataItem.label}
-              count={keyDataItem.count}
-              unit={keyDataItem.unit}
-              icon={keyDataItem.icon}
-            />
-          ))}
+          {adaptedUserKeyData &&
+            adaptedUserKeyData.map((keyDataItem, index) => (
+              <KeyDataCard
+                key={index}
+                label={keyDataItem.label}
+                count={keyDataItem.count}
+                unit={keyDataItem.unit}
+                icon={keyDataItem.icon}
+              />
+            ))}
         </div>
       </div>
     </Layout>

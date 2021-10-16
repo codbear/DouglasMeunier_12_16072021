@@ -1,5 +1,10 @@
 import './ActivityChartLegend.scss';
 
+/**
+ * @description Render the legend to display for ActivityChart
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ActivityChartLegend = () => (
   <div className="ActivityChartLegend">
     <p>Activité quotidienne</p>

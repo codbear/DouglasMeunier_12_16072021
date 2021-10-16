@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Bar,
@@ -16,61 +16,71 @@ import './ActivityChart.scss';
 import CHARTS_PALETTE from '../../../theme/chartsPalette';
 import { ActivityChartTooltip } from '../ActivityChartTooltip';
 import { ActivityChartLegend } from '../ActivityChartLegend';
+import { useUserActivity } from '../../../sdk';
+import { adaptUserActivity } from '../../../services';
 
 const propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      day: PropTypes.number,
-      kilogram: PropTypes.number,
-      calories: PropTypes.number,
-    })
-  ),
+  userId: PropTypes.number,
 };
 
 const defaultProps = {
-  data: [],
+  userId: null,
 };
 
-const ActivityChart = ({ data }) => {
+/**
+ * @description Render a bar chart representing the activity of the user
+ * @return {JSX.Element}
+ */
+const ActivityChart = ({ userId }) => {
   const [state, setState] = useState(0);
+  const { isLoading, data } = useUserActivity(userId);
 
-  useLayoutEffect(() => {
-    setState(1);
-  }, []);
+  useEffect(() => {
+    if (!isLoading) {
+      setState(1);
+    }
+  }, [isLoading]);
 
   return (
     <div className="ActivityChart" key={state}>
-      <ResponsiveContainer>
-        <BarChart data={data} barGap={8}>
-          <CartesianGrid vertical={false} stroke={CHARTS_PALETTE.STROKE} />
+      {!isLoading && (
+        <ResponsiveContainer>
+          <BarChart data={adaptUserActivity(data)} barGap={8}>
+            <CartesianGrid vertical={false} stroke={CHARTS_PALETTE.STROKE} />
 
-          <XAxis dataKey="day" tickLine={false} axisLine={false} height={46} dy={16} />
-          <YAxis
-            orientation="right"
-            tickCount={3}
-            tickLine={false}
-            axisLine={false}
-            width={56}
-            dx={16}
-          />
+            <XAxis dataKey="day" tickLine={false} axisLine={false} height={46} dy={16} />
+            <YAxis
+              orientation="right"
+              tickCount={3}
+              tickLine={false}
+              axisLine={false}
+              width={56}
+              dx={16}
+            />
 
-          <Tooltip content={<ActivityChartTooltip />} />
+            <Tooltip content={<ActivityChartTooltip />} />
 
-          <Legend
-            verticalAlign="top"
-            content={<ActivityChartLegend />}
-            wrapperStyle={{ paddingBottom: '65px' }}
-          />
+            <Legend
+              verticalAlign="top"
+              content={<ActivityChartLegend />}
+              wrapperStyle={{ paddingBottom: '65px' }}
+            />
 
-          <Bar
-            dataKey="kilogram"
-            fill={CHARTS_PALETTE.SECONDARY}
-            barSize={7}
-            radius={[3, 3, 0, 0]}
-          />
-          <Bar dataKey="calories" fill={CHARTS_PALETTE.PRIMARY} barSize={7} radius={[3, 3, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
+            <Bar
+              dataKey="kilogram"
+              fill={CHARTS_PALETTE.SECONDARY}
+              barSize={7}
+              radius={[3, 3, 0, 0]}
+            />
+            <Bar
+              dataKey="calories"
+              fill={CHARTS_PALETTE.PRIMARY}
+              barSize={7}
+              radius={[3, 3, 0, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      )}
     </div>
   );
 };

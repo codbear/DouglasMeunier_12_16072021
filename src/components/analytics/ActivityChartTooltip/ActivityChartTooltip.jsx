@@ -14,6 +14,11 @@ const defaultProps = {
   payload: [],
 };
 
+/**
+ * @description Render the tooltip to display when hovering ActivityChart
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ActivityChartTooltip = ({ payload }) => {
   const kilogram = payload[0] || {};
   const calories = payload[1] || {};

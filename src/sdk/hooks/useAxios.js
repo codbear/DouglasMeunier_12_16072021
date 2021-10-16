@@ -25,7 +25,7 @@ import axios from 'axios';
  * @description Base URL from which API is served
  * @type {string}
  */
-axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.baseURL = process.env.REACT_APP_API_ROOT_URL;
 
 /**
  * @description Create a request with Axios

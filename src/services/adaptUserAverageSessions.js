@@ -1,5 +1,5 @@
 /**
- * @typedef {Object[]} AdaptedUserAverageSessions
+ * @typedef {Object} AdaptedUserAverageSessions
  * @property {'L'|'M'|'J'|'V'|'S'|'D'} day
  * @property {number} sessionLength
  */
@@ -20,7 +20,7 @@ const numericDayToString = {
 /**
  * @description Adapt user average sessions for AverageSessionChart
  * @param {UserAverageSessions} userAverageSessions
- * @return {AdaptedUserAverageSessions}
+ * @return {AdaptedUserAverageSessions[]}
  */
 const adaptUserAverageSessions = (userAverageSessions) =>
   userAverageSessions.sessions.map((session) => ({

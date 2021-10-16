@@ -1,12 +1,12 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import './App.scss';
-import ProfileScreen from './screens/Profile/ProfileScreen';
+import { Profile } from './screens';
 
 function App() {
   return (
     <Router>
-      <ProfileScreen />
+      <Profile />
     </Router>
   );
 }

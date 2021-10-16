@@ -1,5 +1,8 @@
 import './Header.scss';
 
+/**
+ * @description Main nav item's config
+ */
 const NAV_ITEMS = [
   {
     content: 'Accueil',
@@ -15,6 +18,11 @@ const NAV_ITEMS = [
   },
 ];
 
+/**
+ * @description Render App's header with main navigation menu
+ * @return {JSX.Element}
+ * @constructor
+ */
 const Header = () => {
   return (
     <header className="Header">
