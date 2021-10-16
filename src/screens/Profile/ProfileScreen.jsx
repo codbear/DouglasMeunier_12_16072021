@@ -11,6 +11,8 @@ import {
 import { useCurrentUser, useUserKeyData } from '../../sdk';
 
 import { adaptUserKeyData } from '../../services';
+import useSearchParams from '../../sdk/hooks/useSearchParams';
+import { Redirect } from 'react-router-dom';
 
 /**
  * @description Render the profile screen
@@ -18,12 +20,20 @@ import { adaptUserKeyData } from '../../services';
  * @constructor
  */
 const ProfileScreen = () => {
+  const query = useSearchParams();
+  const isErrorNoUserIdSpecified = !query.get('userId');
+
   const { isLoading: isLoadingUser, currentUser } = useCurrentUser();
   const userId = currentUser?.id;
   const firstName = currentUser?.userInfos?.firstName;
 
   const { isLoading: isLoadingUserKeyData, data: userKeyData } = useUserKeyData(userId);
   const adaptedUserKeyData = !isLoadingUserKeyData && adaptUserKeyData(userKeyData);
+
+  // TODO: remove this redirection when authentication is implemented
+  if (isErrorNoUserIdSpecified) {
+    return <Redirect to="/?userId=12" />;
+  }
 
   if (isLoadingUser) {
     return <Layout />;
